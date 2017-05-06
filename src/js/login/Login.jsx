@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import axios from 'axios'
 
 import './login.css'
 
@@ -16,8 +17,16 @@ class Login extends Component {
       username: this.username.value,
       password: this.password.value
     }
-    
-    console.log('Hey there, are you done? this is the user secret data', data)
+
+    axios.post(`${process.env.API_URL}/auth/login`, data)
+    .then((response) => {
+      console.log('we got this as a response')
+    })
+    .catch(() => {
+      this.setState({
+        error: 'Error logging in'
+      })
+    })
   }
 
   render() {
