@@ -11,13 +11,18 @@ class App extends Component {
     super(props)
     
     this.generateContent = this.generateContent.bind(this)
+    
+    this.state = {
+      user: null
+    }
   }
 
   generateContent () {
     const token = cookies.get('token')
+    const user = this.state.user
 
     if (token) {
-      return <Feeder token={token} />
+      return <Feeder token={token} user={user}/>
     } else {
       return <Login />
     }
