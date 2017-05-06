@@ -1,0 +1,10 @@
+.twitter-container {
+  text-align: left;
+  width: 600px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.twitter-container li {
+  list-style: none;
+}
