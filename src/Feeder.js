@@ -26,7 +26,12 @@ class Feeder extends Component {
     axios.get(`${process.env.API_URL || 'http://localhost:5000'}/medium`, { withCredentials: true })
       .then((response) => {
         this.setState({
-          mediumFeed: response.data.map((el) => ( Object.assign({}, el, { provider: 'medium', key: getRandomID(), date: moment(el.pubDate)}) ))
+          mediumFeed: response.data.map((el) => {
+            el.provider ='medium'
+            el.key = getRandomID()
+            el.date = moment(el.pubDate)
+            return el
+          })
         })
       })
       .catch(() => {
@@ -37,7 +42,12 @@ class Feeder extends Component {
     axios.get(`${process.env.API_URL || 'http://localhost:5000'}/twitter`, { withCredentials: true })
       .then((response) => {
         this.setState({
-          twitterFeed: response.data.map((el) => ( Object.assign({}, el, { provider: 'twitter', key: getRandomID(), date: moment(el.createdAt)}) ))
+          twitterFeed: response.data.map((el) => {
+            el.provider ='twitter'
+            el.key = getRandomID()
+            el.date = moment(el.createdAt)
+            return el
+          })
         })
       })
       .catch(() => {
@@ -45,22 +55,33 @@ class Feeder extends Component {
           error: 'Error getting twitter'
         })
       })
-    // axios.get(`${process.env.API_URL || 'http://localhost:5000'}/facebook`, { withCredentials: true })
-    //   .then((response) => {
-    //     this.setState({
-    //       facebookFeed: response.data.map((el) => ( Object.assign({}, el, { provider: 'facebook', key: getRandomID(), date: }) ))
-    //     })
-    //   })
-    //   .catch(() => {
-    //     this.setState({
-    //       error: 'Error getting facebook'
-    //     })
-    //   })
+    axios.get(`${process.env.API_URL || 'http://localhost:5000'}/facebook`, { withCredentials: true })
+      .then((response) => {
+        this.setState({
+          facebookFeed: response.data.map((el) => {
+            el.provider ='facebook'
+            el.key = getRandomID()
+            // el.date = moment(el.createdAt)
+            return el
+          })
+        })
+      })
+      .catch(() => {
+        this.setState({
+          error: 'Error getting facebook'
+        })
+      })
 
 
   }
 
   render() {
+    console.log(moment("Sat, 06 May 2017 06:31:02 GMT"))
+    // console.log([
+    //   ...this.state.mediumFeed,
+    //   ...this.state.twitterFeed,
+    //   ...this.state.facebookFeed
+    // ])
     return (
       <div className="feeder-grid">
         {[
@@ -68,8 +89,14 @@ class Feeder extends Component {
           ...this.state.twitterFeed,
           ...this.state.facebookFeed
         ]
-        .sort(function (a, b) {
-          return a.date.toISOString() - b.date.toISOString()
+        .sort(function(a, b) {
+          if (a.date.isAfter(b.date)) {
+            return 1;
+          } else if (a.date.isBefore(b.date)) {
+            return -1;
+          } else {
+            return 0;
+          }
         })
         .map((item) => {
           if (item.provider === 'facebook') {
@@ -85,7 +112,7 @@ class Feeder extends Component {
                 link={item.link}
                 pubDate={item.pubDate}
                 author={item.author}
-                // image={item.image}
+                image={item.image}
               />
             )
           } else if (item.provider === 'twitter') {
