@@ -97,7 +97,6 @@ class TwitterView extends Component {
 
       </div>
     </div>
-  </div>
 
 
 
