@@ -1,9 +1,17 @@
+body {
+  text-align: center;
+}
+
 .settings {
 
 }
 
 .source__select {
   width: 100%;
+}
+
+.source__select option {
+  text-align: center;
 }
 
 .settings__container {
@@ -18,7 +26,10 @@
 }
 
 .settings__input {
-  width: 100%;
+  width: 50%;
+  text-align: center;
+  border-radius: 20px;
+  margin: 2px;
 }
 
 .settings__title {
@@ -28,5 +39,6 @@
 
 .settings__submit {
   margin: 10px 0;
-  padding: 8px;
+  border-radius: 20px;
+  padding: 5px 20px;
 }
