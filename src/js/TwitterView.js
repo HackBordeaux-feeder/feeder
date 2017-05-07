@@ -89,8 +89,6 @@ class TwitterView extends Component {
         ">
       <div>
           <div styleName="AdaptiveMedia-singlePhoto">
-    <div styleName="AdaptiveMedia-photoContainer" data-image-url="https://pbs.twimg.com/media/C_FzSfGXcAIbNQ9.jpg" data-element-context="platform_photo_card">
-  <img data-aria-label-part="" src="https://pbs.twimg.com/media/C_FzSfGXcAIbNQ9.jpg" alt="" style={{width: '100%', top: '-0px'}} />
 </div>
 
 
