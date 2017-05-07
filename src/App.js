@@ -23,7 +23,7 @@ class App extends Component {
 
     const token = cookies.get('token')
     if (token) {
-      axios.get(`${process.env.API_URL || 'http://localhost:5000'}/user/${token}`)
+      axios.get(`${process.env.API_URL || 'http://localhost:5000'}/user`, { withCredentials: true })
       .then((response) => {
         this.setState({ user: response.data })
       })
@@ -78,7 +78,7 @@ class App extends Component {
       return (
         <Signup
           handleLogin={this.handleLogin}
-          handleSignup={(e) => { e.preventDefault(); this.setState({ route: 'signup' }) }}
+          handleSignup={() => { this.setState({ route: 'login' }) }}
           handleBack={(e) => { e.preventDefault(); this.setState({ route: 'login' }) }}
         />
       )

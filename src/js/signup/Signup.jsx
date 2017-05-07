@@ -19,7 +19,7 @@ class Signup extends Component {
   handleSubmit (e) {
     e.preventDefault()
     const data = {
-      username: this.username.value,
+      user_name: this.username.value,
       password: this.password.value,
       email: this.email.value,
     }
