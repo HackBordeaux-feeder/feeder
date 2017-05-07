@@ -18,7 +18,7 @@ class Settings extends Component {
       service: 'Facebook',
       option: '',
       facebookUser: '',
-      facebookPass: '',
+      facebookPass: ''
     }
   }
 
@@ -28,6 +28,9 @@ class Settings extends Component {
   }
   handleDelete(e, id){
     e.preventDefault()
+    this.props.handleOptionsChange(this.props.user.options.filter((option)=>(
+      option.id != id
+    )))
     axios.post(`${process.env.API_URL || 'http://localhost:5000'}/deleteOption`, {id:id}, { withCredentials: true })
   }
   handleSubmit (e) {
@@ -45,6 +48,7 @@ class Settings extends Component {
     }
     axios.post(`${process.env.API_URL || 'http://localhost:5000'}/subscribe`, data, { withCredentials: true })
     .then((response) => {
+      this.props.handleOptionsChange([...this.props.user.options, {id: response.data, service: data.service, option: data.option}])
       // check if it has updated correctly?
       this.setState({option: ''})
     })

@@ -20,8 +20,13 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleRouteChange = this.handleRouteChange.bind(this)
+    this.handleOptionsChange = this.handleOptionsChange.bind(this)
 
     const token = cookies.get('token')
+    this.state = {
+      user: null,
+      route: "feed"
+    }
     if (token) {
       axios.get(`${process.env.API_URL || 'http://localhost:5000'}/user`, { withCredentials: true })
       .then((response) => {
@@ -31,11 +36,15 @@ class App extends Component {
         this.handleLogout()
       })
     }
+  }
 
-    this.state = {
-      user: null,
-      route: "feed"
-    }
+  handleOptionsChange (opts) {
+    console.log("we are here!")
+    const user = Object.assign({}, this.state.user)
+    user.options = opts
+    this.setState({
+      user: user
+    })
   }
 
   handleLogin (user) {
@@ -73,7 +82,7 @@ class App extends Component {
     if ((token || user) && this.state.route === "feed") {
       return <Feeder token={token} user={user} />
     } else if ((token || user) && this.state.route === "settings") {
-      return <Settings token={token} user={user} />
+      return <Settings token={token} user={user} handleOptionsChange={this.handleOptionsChange} />
     } else if (this.state.route === "signup") {
       return (
         <Signup
