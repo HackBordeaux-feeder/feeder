@@ -2,13 +2,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import cookies from 'js-cookie'
+import CSSModules from 'react-css-modules';
 
-import './login.css'
+import styles from './login.css'
 
 class Login extends Component {
   constructor (props) {
     super(props)
-    
+
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -21,8 +22,8 @@ class Login extends Component {
 
     axios.post(`${process.env.API_URL || 'http://localhost:5000'}/auth/login`, data)
     .then((response) => {
-      cookies.set('token', response.token, { expires: 1 })
-      this.props.handleLogin(response.user)
+      cookies.set('token', response.data.token, { expires: 1 })
+      this.props.handleLogin(response.data.user)
     })
     .catch(() => {
       this.setState({
@@ -33,18 +34,18 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login__container">
-        <h1 className="login__title">Feedr</h1>
+      <div styleName="login__container">
+        <h1 styleName="login__title">Feedr</h1>
         <form onSubmit={this.handleSubmit}>
-          <label for="login__username" className="login__label">User name</label>
-          <input id="login__username" ref={(ref) => this.username = ref} className="login__input"/>
-          <label for="login__password" className="login__label">Password</label>
-          <input id="login__password" ref={(ref) => this.password = ref} className="login__input" type="password" />
-          <input className="login__submit" type="submit" value="Login" />
+          <label htmlFor="login__username" styleName="login__label">User name</label>
+          <input id="login__username" ref={(ref) => this.username = ref} styleName="login__input"/>
+          <label htmlFor="login__password" styleName="login__label">Password</label>
+          <input id="login__password" ref={(ref) => this.password = ref} styleName="login__input" type="password" />
+          <input styleName="login__submit" type="submit" value="Login" />
         </form>
       </div>
     );
   }
 }
 
-export default Login;
+export default CSSModules(Login, styles, {allowMultiple:true});;
