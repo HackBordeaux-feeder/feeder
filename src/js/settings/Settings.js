@@ -29,7 +29,7 @@ class Settings extends Component {
   handleDelete(e, id){
     e.preventDefault()
     this.props.handleOptionsChange(this.props.user.options.filter((option)=>(
-      option.id != id
+      option.id !== id
     )))
     axios.post(`${process.env.API_URL || 'http://localhost:5000'}/deleteOption`, {id:id}, { withCredentials: true })
   }
@@ -76,11 +76,13 @@ class Settings extends Component {
     if (service === 'Facebook') {
       return (
         <div>
-          <label style={{color: 'black'}} htmlFor="facebook__user" styleName="settings__label">Facebook Credentials</label><br/>
-          <input placeholder="Your user" id="facebook__user" value={this.state.facebookUser} styleName="settings__input" onChange={this.handleUserChange}/>
-          <input placeholder="Your password" id="facebook_password" value={this.state.facebookPass} type='password' styleName="settings__input" onChange={this.handlePassChange}/><br/>
+          <label htmlFor="facebook__user" styleName="settings__label">Facebook Credentials</label><br/>
+          <div>
+            <input placeholder="Username" id="facebook__user" value={this.state.facebookUser} styleName="settings__input" onChange={this.handleUserChange}/>
+            <input placeholder="Password" id="facebook_password" value={this.state.facebookPass} type='password' styleName="settings__input" onChange={this.handlePassChange}/><br/>
+          </div>
           <label htmlFor="settings__option" styleName="settings__label">Url of the person/group/page you want to follow</label>
-          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
+          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/><br/>
           <input styleName="settings__submit" type="submit" value="Save" />
           <ul>
           {this.props.user.options.filter((u) => {
