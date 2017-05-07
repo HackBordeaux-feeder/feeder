@@ -87,7 +87,15 @@ class Settings extends Component {
           <ul>
           {this.props.user.options.filter((u) => {
             return (u.service === 'Facebook')}).map((a) => {
-                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onClick={(e) => {this.handleDelete(e, a.id)}}/></li>)
+                return(<label>
+                  <li key={a.id}>{a.option}<input style={{visibility:'hidden'}} type='submit' value='' onClick={(e) => {this.handleDelete(e, a.id)}}/>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                          </svg>
+                        </li>
+                </label>)
             })
           }
           </ul>
@@ -96,13 +104,21 @@ class Settings extends Component {
     } else if (service === "Twitter") {
       return (
         <div>
-          <label htmlFor="settings__option" styleName="settings__label">Twitter username</label>
-          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
+          <label htmlFor="settings__option" styleName="settings__label">Twitter username</label><br/>
+          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/><br/>
           <input styleName="settings__submit" type="submit" value="Add Source" />
           <ul>
           {this.props.user.options.filter((u) => {
             return (u.service === 'Twitter')}).map((a) => {
-                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onClick={(e) => {this.handleDelete(e, a.id)}}/></li>)
+                return(<label>
+                  <li key={a.id}>{a.option}<input style={{visibility:'hidden'}} type='submit' value='' onClick={(e) => {this.handleDelete(e, a.id)}}/>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                          </svg>
+                        </li>
+                </label>)
             })
           }
           </ul>
@@ -111,13 +127,23 @@ class Settings extends Component {
     } else if (service === "Medium") {
       return (
         <div>
-          <label htmlFor="settings__option" styleName="settings__label">Medium username</label>
-          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
+          <label htmlFor="settings__option" styleName="settings__label">Medium username</label><br/>
+          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/><br/>
           <input styleName="settings__submit" type="submit" value="Add Source" />
           <ul>
           {this.props.user.options.filter((u) => {
             return (u.service === 'Medium')}).map((a) => {
-                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onClick={(e) => {this.handleDelete(e, a.id)}}/></li>)
+                return(
+                      <label>
+                        <li key={a.id}>{a.option}<input style={{visibility:'hidden'}} type='submit' value='' onClick={(e) => {this.handleDelete(e, a.id)}}/>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+                                  <path d="M0 0h24v24H0V0z" fill="none"/>
+                                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/>
+                                  <path d="M0 0h24v24H0z" fill="none"/>
+                                </svg>
+                              </li>
+                      </label>
+                )
             })
           }
           </ul>
