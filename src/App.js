@@ -29,7 +29,7 @@ class App extends Component {
     if (token || user) {
       return <Feeder token={token} user={user} />
     } else {
-      return <Login handleLogin={this.handleLogin} />
+      return <Login handleLogin={this.handleLogin} handleSignup={() => { this.setState({ route: 'signup'}) }}/>
     }
   }
 
