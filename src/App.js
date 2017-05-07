@@ -4,6 +4,7 @@ import CSSModules from 'react-css-modules';
 
 // Components
 import Feeder from './Feeder'
+import Settings from './Settings'
 import Login from './js/login/Login'
 
 // CSS
@@ -14,8 +15,10 @@ class App extends Component {
     super(props)
     this.generateContent = this.generateContent.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleRouteChange = this.handleRouteChange.bind(this)
     this.state = {
-      user: null
+      user: null,
+      route: "feed"
     }
   }
 
@@ -23,12 +26,40 @@ class App extends Component {
     this.setState({ user })
   }
 
+  handleRouteChange (route) {
+    this.setState({ route })
+  }
+
+  handleLogout () {
+    cookies.remove('token')
+    this.setState({user: null})
+  }
+
+  addMenu() {
+    const token = cookies.get('token')
+    const user = this.state.user
+
+      if ((token || user)) {
+        return (
+          <ul>
+            <li styleName="feed"><a styleName={this.state.route === 'feed' ? 'active' : ''} href="#" onClick={() => this.handleRouteChange('feed')}>Feed</a></li>
+            <li styleName="settings"><a styleName={this.state.route === 'settings' ? 'active' : ''} href="#" onClick={() => this.handleRouteChange('settings')}>Settings</a></li>
+            <li styleName="logout" onClick={()=>this.handleLogout()}><a>Logout</a></li>
+          </ul>
+        )
+      }
+  }
+
   generateContent () {
     const token = cookies.get('token')
     const user = this.state.user
 
-    if (token || user) {
+    if ((token || user) && this.state.route === "feed") {
+      console.log('go to feed!')
       return <Feeder token={token} user={user} />
+    } else if ((token || user) && this.state.route === "settings") {
+      console.log('go to settings!')
+      return <Settings token={token} user={user} />
     } else {
       return <Login handleLogin={this.handleLogin} />
     }
@@ -38,10 +69,7 @@ class App extends Component {
     return (
       <div>
         <div styleName="topNav">
-          <ul>
-            <li styleName="feed"><a href="">Feed</a></li>
-            <li styleName="settings"><a styleName="active" href="#">Settings</a></li>
-          </ul>
+            {this.addMenu()}
         </div>
        {/* <div styleName="content" style={{marginTop: "40px"}}> */}
          {this.generateContent()}
