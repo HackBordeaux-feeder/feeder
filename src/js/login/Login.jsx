@@ -46,7 +46,7 @@ class Login extends Component {
           <label htmlFor="login__password" styleName="login__label">Password</label>
           <input id="login__password" ref={(ref) => this.password = ref} styleName="login__input" type="password" />
           <input styleName="login__submit" type="submit" value="Login" />
-          <button onClick={this.props.handleSignup}>Sign up</button>
+          <button style={{ float: 'right', position: 'relative', top: 15 }} onClick={this.props.handleSignup}>Sign up</button>
           {this.state.error}
         </form>
       </div>
