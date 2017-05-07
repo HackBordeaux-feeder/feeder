@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import _ from 'lodash';
 
 import FacebookView from './js/FacebookView.js';
 import TwitterView from './js/TwitterView.js';
@@ -29,7 +30,7 @@ class Feeder extends Component {
           mediumFeed: response.data.map((el) => {
             el.provider ='medium'
             el.key = getRandomID()
-            el.date = moment(el.pubDate)
+            el.date = moment(el.pubDate[0]).unix()
             return el
           })
         })
@@ -45,7 +46,7 @@ class Feeder extends Component {
           twitterFeed: response.data.map((el) => {
             el.provider ='twitter'
             el.key = getRandomID()
-            el.date = moment(el.createdAt)
+            el.date = moment(el.createdAt).unix()
             return el
           })
         })
@@ -76,28 +77,15 @@ class Feeder extends Component {
   }
 
   render() {
-    console.log(moment("Sat, 06 May 2017 06:31:02 GMT"))
-    // console.log([
-    //   ...this.state.mediumFeed,
-    //   ...this.state.twitterFeed,
-    //   ...this.state.facebookFeed
-    // ])
+    const data = _.sortBy([
+      ...this.state.mediumFeed,
+      ...this.state.twitterFeed,
+      ...this.state.facebookFeed
+    ], (item) => (item.date))
+
     return (
       <div className="feeder-grid">
-        {[
-          ...this.state.mediumFeed,
-          ...this.state.twitterFeed,
-          ...this.state.facebookFeed
-        ]
-        .sort(function(a, b) {
-          if (a.date.isAfter(b.date)) {
-            return 1;
-          } else if (a.date.isBefore(b.date)) {
-            return -1;
-          } else {
-            return 0;
-          }
-        })
+        {data
         .map((item) => {
           if (item.provider === 'facebook') {
             return (
