@@ -1,0 +1,32 @@
+.settings {
+
+}
+
+.source__select {
+  width: 100%;
+}
+
+.settings__container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0px auto 0;
+  padding-top: 50px;
+}
+
+.settings__label {
+  width: 100%;
+}
+
+.settings__input {
+  width: 100%;
+}
+
+.settings__title {
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
+
+.settings__submit {
+  margin: 10px 0;
+  padding: 8px;
+}
