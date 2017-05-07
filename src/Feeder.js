@@ -4,12 +4,13 @@ import FacebookView from './js/FacebookView.js';
 import TwitterView from './js/TwitterView.js';
 import MediumView from './js/MediumView.js';
 
-import './Feeder.css';
+import CSSModules from 'react-css-modules';
+import styles from './Feeder.css';
 
 class Feeder extends Component {
   render() {
     return (
-      <div className="feeder-grid">
+      <div styleName="feeder-grid">
         <FacebookView />
         <TwitterView
           createdAt="Fri May 05 20:00:03 +0000 2017"
@@ -34,4 +35,4 @@ class Feeder extends Component {
   }
 }
 
-export default Feeder;
+export default CSSModules(Feeder, styles, {allowMultiple:true});
