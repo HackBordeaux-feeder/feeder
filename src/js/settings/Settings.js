@@ -46,17 +46,19 @@ class Settings extends Component {
     if(this.state.facebookUser && this.state.facebookPass !== ''){
       axios.put(`${process.env.API_URL || 'http://localhost:5000'}/fbcredentials`, data2, { withCredentials: true })
     }
-    axios.post(`${process.env.API_URL || 'http://localhost:5000'}/subscribe`, data, { withCredentials: true })
-    .then((response) => {
-      this.props.handleOptionsChange([...this.props.user.options, {id: response.data, service: data.service, option: data.option}])
-      // check if it has updated correctly?
-      this.setState({option: ''})
-    })
-    .catch(() => {
-      this.setState({
-        error: 'Error logging in'
+    if(this.state.option !== ''){
+      axios.post(`${process.env.API_URL || 'http://localhost:5000'}/subscribe`, data, { withCredentials: true })
+      .then((response) => {
+        this.props.handleOptionsChange([...this.props.user.options, {id: response.data, service: data.service, option: data.option}])
+        // check if it has updated correctly?
+        this.setState({option: ''})
       })
-    })
+      .catch(() => {
+        this.setState({
+          error: 'Error logging in'
+        })
+      })
+    }
   }
 
   handleOptionChange(event) {
