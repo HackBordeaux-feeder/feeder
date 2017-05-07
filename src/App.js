@@ -12,9 +12,8 @@ import styles from './App.css'
 class App extends Component {
   constructor (props) {
     super(props)
-
     this.generateContent = this.generateContent.bind(this)
-
+    this.handleLogin = this.handleLogin.bind(this)
     this.state = {
       user: null
     }
