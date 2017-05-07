@@ -45,25 +45,40 @@ class Settings extends Component {
     if (service === 'Facebook') {
       return (
         <div>
-          <label htmlFor="settings__option" styleName="settings__label">Url of the person you want to follow</label>
-          <input id="settings__option" ref={(ref) => this.username = ref} styleName="settings__input"/>
-          <input styleName="settings__submit" type="submit" value="Add Source" />
+          <label style={{color: 'black'}} htmlFor="facebook__user" styleName="settings__label">Facebook Credentials</label><br/>
+          <input placeholder="Your user" id="facebook__user" styleName="settings__input"/>
+          <input placeholder="Your password" id="facebook_password" type='password' styleName="settings__input"/><br/>
+          <label htmlFor="settings__option" styleName="settings__label">Url of the person/group/page you want to follow</label>
+          {this.props.user.options.filter((a) => {
+            return (a.sources === 'facebook')
+          }).map((a) => {
+            return (<input id="settings__option" value={a.source} ref={(ref) => this.username = ref} styleName="settings__input"/>)
+          })}
+          <input styleName="settings__submit" type="submit" value="Save" />
         </div>
       )
     } else if (service === "Twitter") {
       return (
         <div>
           <label htmlFor="settings__option" styleName="settings__label">Twitter username</label>
-          <input id="settings__option" ref={(ref) => this.username = ref} styleName="settings__input"/>
-          <input styleName="settings__submit" type="submit" value="Add Source" />
+          {this.props.user.options.filter((a) => {
+            return (a.sources === 'twitter')
+          }).map((a) => {
+            return ( <input id="settings__option" value={a.source} ref={(ref) => this.username = ref} styleName="settings__input"/>)
+          })}
+          <input styleName="settings__submit" type="submit" value="Save" />
         </div>
       )
     } else if (service === "Medium") {
       return (
         <div>
           <label htmlFor="settings__option" styleName="settings__label">Medium username</label>
-          <input id="settings__option" ref={(ref) => this.username = ref} styleName="settings__input"/>
-          <input styleName="settings__submit" type="submit" value="Add Source" />
+          {this.props.user.options.filter((a) => {
+            return (a.sources === 'medium')
+          }).map((a) => {
+            return (<input id="settings__option" value={a.source} ref={(ref) => this.username = ref} styleName="settings__input"/>)
+          })}
+          <input styleName="settings__submit" type="submit" value="Save" />
         </div>
       )
     }
