@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules';
 import Feeder from './Feeder'
 import Settings from './js/settings/Settings'
 import Login from './js/login/Login'
+import Signup from './js/signup/Signup'
 
 // CSS
 import styles from './App.css'
@@ -60,8 +61,21 @@ class App extends Component {
     } else if ((token || user) && this.state.route === "settings") {
       console.log('go to settings!')
       return <Settings token={token} user={user} />
+    } else if (this.state.route === "signup") {
+      return (
+        <Signup
+          handleLogin={this.handleLogin}
+          handleSignup={(e) => { e.preventDefault(); this.setState({ route: 'signup' }) }}
+          handleBack={(e) => { e.preventDefault(); this.setState({ route: 'login' }) }}
+        />
+      )
     } else {
-      return <Login handleLogin={this.handleLogin} />
+      return (
+        <Login
+          handleLogin={this.handleLogin}
+          handleSignup={(e) => { e.preventDefault(); this.setState({ route: 'signup' }) }}
+        />
+      )
     }
   }
 
