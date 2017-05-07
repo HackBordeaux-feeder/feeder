@@ -26,8 +26,9 @@ class Settings extends Component {
     console.log(event.target.value)
     this.setState({service: event.target.value});
   }
-  handleDelete(id){
-    axios.post(`${process.env.API_URL || 'http://localhost:5000'}/deleteOption`, id, { withCredentials: true })
+  handleDelete(e, id){
+    e.preventDefault()
+    axios.post(`${process.env.API_URL || 'http://localhost:5000'}/deleteOption`, {id:id}, { withCredentials: true })
   }
   handleSubmit (e) {
     e.preventDefault()
@@ -78,7 +79,7 @@ class Settings extends Component {
           <ul>
           {this.props.user.options.filter((u) => {
             return (u.service === 'Facebook')}).map((a) => {
-                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onChange={this.handleDelete(a.id)}/></li>)
+                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onClick={(e) => {this.handleDelete(e, a.id)}}/></li>)
             })
           }
           </ul>
@@ -90,6 +91,13 @@ class Settings extends Component {
           <label htmlFor="settings__option" styleName="settings__label">Twitter username</label>
           <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
           <input styleName="settings__submit" type="submit" value="Add Source" />
+          <ul>
+          {this.props.user.options.filter((u) => {
+            return (u.service === 'Twitter')}).map((a) => {
+                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onClick={(e) => {this.handleDelete(e, a.id)}}/></li>)
+            })
+          }
+          </ul>
         </div>
       )
     } else if (service === "Medium") {
@@ -98,6 +106,13 @@ class Settings extends Component {
           <label htmlFor="settings__option" styleName="settings__label">Medium username</label>
           <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
           <input styleName="settings__submit" type="submit" value="Add Source" />
+          <ul>
+          {this.props.user.options.filter((u) => {
+            return (u.service === 'Medium')}).map((a) => {
+                return(<li key={a.id}>{a.option}<input type='submit' value='Delete' onClick={(e) => {this.handleDelete(e, a.id)}}/></li>)
+            })
+          }
+          </ul>
         </div>
       )
     }
