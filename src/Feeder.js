@@ -81,10 +81,10 @@ class Feeder extends Component {
       ...this.state.mediumFeed,
       ...this.state.twitterFeed,
       ...this.state.facebookFeed
-    ], (item) => (item.date))
+    ], (item) => (item.date)).reverse()
 
     return (
-      <div className="feeder-grid">
+      <div className="feeder-grid" style={{paddingTop: '10px'}}>
         {data
         .map((item) => {
           if (item.provider === 'facebook') {
