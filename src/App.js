@@ -78,7 +78,7 @@ class App extends Component {
       return (
         <Signup
           handleLogin={this.handleLogin}
-          handleSignup={(e) => { e.preventDefault(); this.setState({ route: 'signup' }) }}
+          handleSignup={() => { this.setState({ route: 'login' }) }}
           handleBack={(e) => { e.preventDefault(); this.setState({ route: 'login' }) }}
         />
       )
