@@ -88,8 +88,6 @@ class TwitterView extends Component {
 
         ">
       <div>
-          <div styleName="AdaptiveMedia-singlePhoto">
-</div>
 
 
 </div>
