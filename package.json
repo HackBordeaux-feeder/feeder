@@ -8,6 +8,7 @@
     "js-cookie": "^2.1.4",
     "nightmare": "^2.10.0",
     "react": "^15.5.4",
+    "react-css-modules": "^4.0.5",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import axios from 'axios'
+import cookies from 'js-cookie'
 
 import './login.css'
 
@@ -18,9 +19,10 @@ class Login extends Component {
       password: this.password.value
     }
 
-    axios.post(`${process.env.API_URL}/auth/login`, data)
+    axios.post(`${process.env.API_URL || 'http://localhost:5000'}/auth/login`, data)
     .then((response) => {
-      console.log('we got this as a response')
+      cookies.set('token', response.token, { expires: 1 })
+      this.props.handleLogin(response.user)
     })
     .catch(() => {
       this.setState({

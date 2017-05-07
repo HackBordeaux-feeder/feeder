@@ -14,15 +14,24 @@ class App extends Component {
     super(props)
 
     this.generateContent = this.generateContent.bind(this)
+    
+    this.state = {
+      user: null
+    }
+  }
+  
+  handleLogin (user) {
+    this.setState({ user })
   }
 
   generateContent () {
     const token = cookies.get('token')
+    const user = this.state.user
 
-    if (token) {
-      return <Feeder token={token} />
+    if (token || user) {
+      return <Feeder token={token} user={user} />
     } else {
-      return <Login />
+      return <Login handleLogin={this.handleLogin} />
     }
   }
 
