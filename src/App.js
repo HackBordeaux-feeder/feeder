@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import cookies from 'js-cookie'
 import CSSModules from 'react-css-modules';
+import axios from 'axios'
 
 // Components
 import Feeder from './Feeder'
@@ -14,9 +15,23 @@ import styles from './App.css'
 class App extends Component {
   constructor (props) {
     super(props)
+
     this.generateContent = this.generateContent.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
     this.handleRouteChange = this.handleRouteChange.bind(this)
+
+    const token = cookies.get('token')
+    if (token) {
+      axios.get(`${process.env.API_URL || 'http://localhost:5000'}/user`, { withCredentials: true })
+      .then((response) => {
+        this.setState({ user: response.data })
+      })
+      .catch(() => {
+        this.handleLogout()
+      })
+    }
+
     this.state = {
       user: null,
       route: "feed"
@@ -56,10 +71,8 @@ class App extends Component {
     const user = this.state.user
 
     if ((token || user) && this.state.route === "feed") {
-      console.log('go to feed!')
       return <Feeder token={token} user={user} />
     } else if ((token || user) && this.state.route === "settings") {
-      console.log('go to settings!')
       return <Settings token={token} user={user} />
     } else if (this.state.route === "signup") {
       return (

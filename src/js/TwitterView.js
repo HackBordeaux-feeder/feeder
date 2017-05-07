@@ -28,7 +28,7 @@ class TwitterView extends Component {
 
 
       <div styleName="stream-item-header">
-          <a styleName="account-group" href="/NASAAero" data-user-id="2734381938">
+          <a styleName="account-group" href={this.props.profileLink} data-user-id="2734381938">
     <img styleName="avatar" src={this.props.profileImage} alt="" />
     <span>
       <strong styleName="fullname" data-aria-label-part="">{this.props.name}</strong><span>‏</span><span styleName="UserBadges"><span styleName="Icon Icon--verified"><span styleName="u-hiddenVisually">Cuenta verificada</span></span></span><span>&nbsp;</span></span><span styleName="username u-dir" dir="ltr" data-aria-label-part="">@<b>{this.props.username}</b></span></a>
