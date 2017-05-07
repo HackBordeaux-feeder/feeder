@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules';
 
 // Components
 import Feeder from './Feeder'
-import Settings from './Settings'
+import Settings from './js/settings/Settings'
 import Login from './js/login/Login'
 
 // CSS
