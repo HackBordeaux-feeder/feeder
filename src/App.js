@@ -1,25 +1,25 @@
-
 import React, { Component } from 'react';
 import cookies from 'js-cookie'
+import CSSModules from 'react-css-modules';
 
 // Components
 import Feeder from './Feeder'
 import Login from './js/login/Login'
 
 // CSS
-import './App.css'
+import styles from './App.css'
 
 class App extends Component {
   constructor (props) {
     super(props)
 
     this.generateContent = this.generateContent.bind(this)
-    
+
     this.state = {
       user: null
     }
   }
-  
+
   handleLogin (user) {
     this.setState({ user })
   }
@@ -38,13 +38,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="topNav">
+        <div styleName="topNav">
           <ul>
-            <li className="feed"><a href="">Feed</a></li>
-            <li className="settings"><a className="active" href="#">Settings</a></li>
+            <li styleName="feed"><a href="">Feed</a></li>
+            <li styleName="settings"><a styleName="active" href="#">Settings</a></li>
           </ul>
         </div>
-       {/* <div className="content" style={{marginTop: "40px"}}> */}
+       {/* <div styleName="content" style={{marginTop: "40px"}}> */}
          {this.generateContent()}
        {/* </div> */}
       </div>
@@ -52,4 +52,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default CSSModules(App, styles, {allowMultiple:true});;
