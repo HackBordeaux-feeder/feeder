@@ -78,25 +78,6 @@ class TwitterView extends Component {
 
 
 
-            <div styleName="AdaptiveMediaOuterContainer">
-    <div styleName="AdaptiveMedia
-
-
-        is-square
-
-
-
-        ">
-      <div>
-
-
-</div>
-
-
-      </div>
-    </div>
-
-
 
 
 
