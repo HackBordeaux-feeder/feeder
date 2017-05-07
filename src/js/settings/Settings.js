@@ -89,7 +89,7 @@ class Settings extends Component {
       return (
         <div>
           <label htmlFor="settings__option" styleName="settings__label">Twitter username</label>
-          <input id="settings__option" ref={(ref) => this.option = ref} styleName="settings__input"/>
+          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
           <input styleName="settings__submit" type="submit" value="Add Source" />
           <ul>
           {this.props.user.options.filter((u) => {
@@ -104,7 +104,7 @@ class Settings extends Component {
       return (
         <div>
           <label htmlFor="settings__option" styleName="settings__label">Medium username</label>
-          <input id="settings__option" ref={(ref) => this.option = ref} styleName="settings__input"/>
+          <input id="settings__option" value={this.state.option} styleName="settings__input" onChange={this.handleOptionChange}/>
           <input styleName="settings__submit" type="submit" value="Add Source" />
           <ul>
           {this.props.user.options.filter((u) => {
