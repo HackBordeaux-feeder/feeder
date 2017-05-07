@@ -56,22 +56,22 @@ class Feeder extends Component {
           error: 'Error getting twitter'
         })
       })
-    // axios.get(`${process.env.API_URL || 'http://localhost:5000'}/facebook`, { withCredentials: true })
-    //   .then((response) => {
-    //     this.setState({
-    //       facebookFeed: response.data.map((el) => {
-    //         el.provider ='facebook'
-    //         el.key = getRandomID()
-    //         // el.date = moment(el.createdAt)
-    //         return el
-    //       })
-    //     })
-    //   })
-    //   .catch(() => {
-    //     this.setState({
-    //       error: 'Error getting facebook'
-    //     })
-    //   })
+    axios.get(`${process.env.API_URL || 'http://localhost:5000'}/facebook`, { withCredentials: true })
+      .then((response) => {
+        this.setState({
+          facebookFeed: response.data.map((el) => {
+            el.provider ='facebook'
+            el.key = getRandomID()
+            el.date = el.time
+            return el
+          })
+        })
+      })
+      .catch(() => {
+        this.setState({
+          error: 'Error getting facebook'
+        })
+      })
 
 
   }
@@ -89,7 +89,13 @@ class Feeder extends Component {
         .map((item) => {
           if (item.provider === 'facebook') {
             return (
-              <FacebookView key={item.key}/>
+              <FacebookView
+                key={item.key}
+                name={item.name}
+                image={item.image}
+                text={item.text}
+                dateFbk={moment.unix(item.date).fromNow()}
+              />
             )
           } else if (item.provider === 'medium') {
             return (
