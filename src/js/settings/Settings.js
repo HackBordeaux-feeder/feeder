@@ -49,7 +49,7 @@ class Settings extends Component {
     if(this.state.option !== ''){
       axios.post(`${process.env.API_URL || 'http://localhost:5000'}/subscribe`, data, { withCredentials: true })
       .then((response) => {
-        this.props.handleOptionsChange([...this.props.user.options, {id: response.data, service: data.service, option: data.option}])
+        this.props.handleOptionsChange([...this.props.user.options, {id: response.data.id, service: data.service, option: data.option}])
         // check if it has updated correctly?
         this.setState({option: ''})
       })
@@ -63,13 +63,13 @@ class Settings extends Component {
 
   handleOptionChange(event) {
    this.setState({option: event.target.value});
- }
- handleUserChange(event) {
-  this.setState({facebookUser: event.target.value});
- }
- handlePassChange(event) {
-  this.setState({facebookPass: event.target.value});
- }
+  }
+  handleUserChange(event) {
+    this.setState({facebookUser: event.target.value});
+  }
+  handlePassChange(event) {
+    this.setState({facebookPass: event.target.value});
+  }
 
   renderOptions () {
     const service = this.state.service
