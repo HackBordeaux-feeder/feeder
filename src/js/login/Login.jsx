@@ -22,6 +22,7 @@ class Login extends Component {
     axios.post(`${process.env.API_URL || 'http://localhost:5000'}/auth/login`, data)
     .then((response) => {
       cookies.set('token', response.token, { expires: 1 })
+      this.props.handleLogin(response.user)
     })
     .catch(() => {
       this.setState({
