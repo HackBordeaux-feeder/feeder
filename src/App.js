@@ -11,6 +11,7 @@ class App extends Component {
     super(props)
     
     this.generateContent = this.generateContent.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
     
     this.state = {
       user: null
