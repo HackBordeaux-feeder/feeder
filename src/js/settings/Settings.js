@@ -28,7 +28,7 @@ class Settings extends Component {
       option: this.state.option
     }
 
-    axios.post(`${process.env.API_URL || 'http://localhost:5000'}/subscribe`, data)
+    axios.post(`${process.env.API_URL || 'http://localhost:5000'}/subscribe`, data, { withCredentials: true })
     .then((response) => {
       // check if it has updated correctly?
       this.setState({option: ''})
