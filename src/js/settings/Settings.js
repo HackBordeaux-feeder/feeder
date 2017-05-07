@@ -63,13 +63,13 @@ class Settings extends Component {
 
   handleOptionChange(event) {
    this.setState({option: event.target.value});
- }
- handleUserChange(event) {
-  this.setState({facebookUser: event.target.value});
- }
- handlePassChange(event) {
-  this.setState({facebookPass: event.target.value});
- }
+  }
+  handleUserChange(event) {
+    this.setState({facebookUser: event.target.value});
+  }
+  handlePassChange(event) {
+    this.setState({facebookPass: event.target.value});
+  }
 
   renderOptions () {
     const service = this.state.service
