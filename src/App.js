@@ -23,7 +23,7 @@ class App extends Component {
 
     const token = cookies.get('token')
     if (token) {
-      axios.get(`${process.env.API_URL || 'http://localhost:5000'}/user/${token}`)
+      axios.get(`${process.env.API_URL || 'http://localhost:5000'}/user`, { withCredentials: true })
       .then((response) => {
         this.setState({ user: response.data })
       })
